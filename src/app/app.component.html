@@ -1,0 +1,64 @@
+
+        <header>
+            <h1>Visor NetCDF</h1>
+        </header>
+
+        <aside>
+            <mat-card>
+                <div class="mat-card border-info mb-3 strong" style="max-width: 20rem;">
+                    <h4 class="card-header">Seleccionar archivo</h4>
+                    <div class="card-body">
+                        <p class="card-text">Seleccione el archivo en formato NetCDF a inspeccionar.</p>
+                    </div>
+                    <div class="card-footer text-right">
+                        <a href="#nav" class="btn btn-primary">Cargar</a>
+                    </div>
+                </div>
+            </mat-card>
+
+            <div id="nav">
+                <div>
+                    Archivo cargado:<strong>out.cn</strong>
+                </div>
+
+                <div class="card border-info mb-3 strong" style="max-width: 20rem;">
+                    <h5 class="card-header">Variables <span class="badge badge-info">14</span></h5>
+                    <div class="card-body">
+                        <p class="card-text">Seleccione la variable que se quiere desplegar en la página.</p>
+                    </div>
+                    <div class="card-footer text-right">
+                        <div class="dropright">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Seleccionar variable
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">variable 1</a>
+                            <a class="dropdown-item" href="#">variable 2</a>
+                            <a class="dropdown-item" href="#">variable 3</a>
+                            <a class="dropdown-item" href="#">variable 4</a>
+                            <a class="dropdown-item" href="#">variable 5</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <section>
+            <h3>Variable 1</h3>
+            <div class="card bg-info mb-3 strong">
+                <div class="card-body">
+                    <h5 class="card-title">Metadata</h5>
+                    <p class="card-text">name: variable 1<br>rango: 2<br>Nombre largo: variable larga</p>
+                </div>
+            </div>
+            <div class="card bg-light mb-8">
+                <div class="card-body">
+                    <table id="example" class="display" style="width:100%">
+                    </table>
+                </div>
+            </div>
+        </section>        
+        <footer>
+            Copyright © Hugo, Juan Carlos, Pablo
+        </footer>

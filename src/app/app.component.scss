@@ -1,0 +1,40 @@
+body { 
+    margin: 0 auto; 
+    background-position:center; 
+    background-size: contain; 
+} 
+header
+{
+    padding-top: 12px;
+    text-align: center;
+    height: 76px;
+    background: rgb(0,7,36);
+    background: linear-gradient(180deg, rgba(0,7,36,1) 0%, rgba(9,39,121,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+h1 {
+    color: antiquewhite;
+    vertical-align: text-bottom;
+}
+
+aside
+{
+    margin-top:5px;
+    padding:5px;
+    float: left;
+}
+
+section
+{
+    padding:5px;
+    float: left;
+    margin-top:5px;
+}
+
+footer
+{
+    clear: both;
+    padding:5px;
+    text-align:center;
+    font-weight:bold;
+}
