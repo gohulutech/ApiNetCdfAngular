@@ -31,6 +31,13 @@ section
     margin-top:5px;
 }
 
+th, td {
+    overflow: hidden;
+    width: 200px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
 footer
 {
     clear: both;
@@ -38,3 +45,20 @@ footer
     text-align:center;
     font-weight:bold;
 }
+
+.fileinput > {
+    padding-left: 5px;
+}
+
+.sidenav {
+    padding: 5px;
+    width: 300px;
+}
+
+.sidenav-content {
+    height: 90vh;
+    overflow: auto;
+}
+
+app-sidenav { display: flex; }
+.sidenav-container { flex: 1 1 auto; }

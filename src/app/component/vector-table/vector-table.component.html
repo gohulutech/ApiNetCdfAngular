@@ -1,0 +1,16 @@
+<mat-card>
+    <mat-card-title>Datos</mat-card-title>
+    <mat-card-subtitle>Tipo de dato Vector</mat-card-subtitle>
+    <mat-card-content>
+      <mat-table #table [dataSource]="data">
+          <ng-container matColumnDef="Column1">
+            <mat-header-cell *matHeaderCellDef>Column 1</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element}}</mat-cell>
+          </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="[ 'Column1' ]"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: [ 'Column1' ];"></mat-row>
+      </mat-table>
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+    </mat-card-content>
+  </mat-card>

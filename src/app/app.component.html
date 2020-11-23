@@ -1,64 +1,45 @@
+<mat-toolbar color="primary" fxLayout="row">
+  <button mat-icon-button (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span fxFlexFill>Visor NetCDF</span>
+</mat-toolbar>
 
-        <header>
-            <h1>Visor NetCDF</h1>
-        </header>
+<div class="app-sidenav">
+<mat-drawer-container class="sidenav-container" >
+    <mat-drawer opened #drawer mode="side" class="sidenav" fxLayout="column" fxLayoutAlign="space-around stretch">
+        <div class="fileinput" fxLayout="row" fxLayoutAlign="space-around">
+            <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+            <button mat-raised-button type="button" color="primary" (click)="fileInput.click()">Cargar Archivo</button>
+            <mat-label #lblFile id="lblFile"></mat-label>
+        </div>
+        
+        <br/>
+        <div>
+          <mat-label *ngIf="Variables && Variables.length"><b>Variables</b></mat-label>  
+        </div>
 
-        <aside>
-            <mat-card>
-                <div class="mat-card border-info mb-3 strong" style="max-width: 20rem;">
-                    <h4 class="card-header">Seleccionar archivo</h4>
-                    <div class="card-body">
-                        <p class="card-text">Seleccione el archivo en formato NetCDF a inspeccionar.</p>
-                    </div>
-                    <div class="card-footer text-right">
-                        <a href="#nav" class="btn btn-primary">Cargar</a>
-                    </div>
-                </div>
-            </mat-card>
+        <mat-form-field appearance="outline" fxFlex="1 1 100" *ngIf="Variables && Variables.length">
+            <mat-label>Seleccione una variable</mat-label>
+            <mat-select (selectionChange)="onVariableChanged($event);" fxFlexFill>
+              <mat-option *ngFor="let variable of Variables" [value]="variable.Id">{{variable.Value}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-            <div id="nav">
-                <div>
-                    Archivo cargado:<strong>out.cn</strong>
-                </div>
-
-                <div class="card border-info mb-3 strong" style="max-width: 20rem;">
-                    <h5 class="card-header">Variables <span class="badge badge-info">14</span></h5>
-                    <div class="card-body">
-                        <p class="card-text">Seleccione la variable que se quiere desplegar en la página.</p>
-                    </div>
-                    <div class="card-footer text-right">
-                        <div class="dropright">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Seleccionar variable
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">variable 1</a>
-                            <a class="dropdown-item" href="#">variable 2</a>
-                            <a class="dropdown-item" href="#">variable 3</a>
-                            <a class="dropdown-item" href="#">variable 4</a>
-                            <a class="dropdown-item" href="#">variable 5</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </aside>
-
-        <section>
-            <h3>Variable 1</h3>
-            <div class="card bg-info mb-3 strong">
-                <div class="card-body">
-                    <h5 class="card-title">Metadata</h5>
-                    <p class="card-text">name: variable 1<br>rango: 2<br>Nombre largo: variable larga</p>
-                </div>
-            </div>
-            <div class="card bg-light mb-8">
-                <div class="card-body">
-                    <table id="example" class="display" style="width:100%">
-                    </table>
-                </div>
-            </div>
-        </section>        
-        <footer>
-            Copyright © Hugo, Juan Carlos, Pablo
-        </footer>
+        <div *ngIf="Metadatos && Metadatos.length">
+          <mat-label><b>Metadatos</b></mat-label>  
+            <mat-selection-list #metadatos [multiple]="false">
+                <mat-list-option *ngFor="let metadato of Metadatos" >
+                  {{ metadato.Tipo + ': ' + metadato.Valor }}
+                </mat-list-option>
+              </mat-selection-list>
+        </div>
+    </mat-drawer>
+  
+    <div class="sidenav-content mat-elevation-z8">
+      <app-array-table #arrayTable [hidden]="!TipoDatoArreglo"></app-array-table>
+      <app-vector-table #vectorTable [hidden]="!TipoDatoVector"></app-vector-table>
+      <app-escalar-variable #escalarVariable [hidden]="!TipoDatoEscalar"></app-escalar-variable>
+    </div>
+  </mat-drawer-container>
+</div>
