@@ -1,46 +1,22 @@
-<mat-toolbar color="primary" fxLayout="row">
-  <button mat-icon-button (click)="drawer.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span fxFlexFill>Visor NetCDF</span>
+<mat-toolbar color="primary" >
+  <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxFlex="50">
+      <button mat-icon-button>
+        <mat-icon (click)="drawer.toggle()">menu</mat-icon>
+      </button>
+    </div>
+    <div fxFlex="50" fxLayoutAlign="right center">
+      <span ngClass.lt-sm="brand-sm">Visor NetCdf</span>
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>
 
 <div class="app-sidenav">
 <mat-drawer-container class="sidenav-container" >
     <mat-drawer opened #drawer mode="side" class="sidenav" fxLayout="column" fxLayoutAlign="space-around stretch">
-      <mat-card>
-        <mat-card-title>Seleccione un archivo</mat-card-title>
-          <mat-card-content>
-            <div class="fileinput" fxLayout="row" fxLayoutAlign="space-around">
-              <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
-              <button mat-raised-button type="button" color="primary" (click)="fileInput.click()">Cargar Archivo</button>
-              <mat-label #lblFile id="lblFile"></mat-label>
-            </div>
-          
-            <br/>
-            <div>
-              <mat-label *ngIf="Variables && Variables.length"><b>Variables</b></mat-label>  
-            </div>
-    
-            <mat-form-field appearance="outline" fxFlex="1 1 100" *ngIf="Variables && Variables.length">
-                <mat-label>Seleccione una variable</mat-label>
-                <mat-select (selectionChange)="onVariableChanged($event);" fxFlexFill>
-                  <mat-option *ngFor="let variable of Variables" [value]="variable">{{variable.Value}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-    
-            <div *ngIf="Metadatos && Metadatos.length">
-              <mat-label><b>Metadatos</b></mat-label>  
-                <mat-selection-list #metadatos [multiple]="false">
-                    <mat-list-option *ngFor="let metadato of Metadatos" >
-                      {{ metadato.Tipo + ': ' + metadato.Valor }}
-                    </mat-list-option>
-                  </mat-selection-list>
-            </div>
-        </mat-card-content>
-      </mat-card>
+      <app-side-menu #sidemenu (archivoCargado)="onFileChanged($event);" 
+        (variableSeleccionada)="onVariableChanged($event);"></app-side-menu>
     </mat-drawer>
-  
     <div class="sidenav-content mat-elevation-z8">
       <app-array-table #arrayTable [hidden]="!TipoDatoArreglo"></app-array-table>
       <app-vector-table #vectorTable [hidden]="!TipoDatoVector"></app-vector-table>

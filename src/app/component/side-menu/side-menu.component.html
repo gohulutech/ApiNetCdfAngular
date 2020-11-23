@@ -1,0 +1,46 @@
+<div>
+  <mat-card>
+    <mat-card-title>Seleccione un archivo</mat-card-title>
+    <mat-card-subtitle>Visor NetCdf</mat-card-subtitle>
+      <mat-card-content>
+        <div fxLayout="column" fxLayoutAlign="space-around stretch">
+          <div fxFlexFill class="fileinput" fxLayout="row" fxLayoutAlign="space-around">
+            <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+            <button fxFlex="1 1 100" fxLayoutAlign="space-around" #fileButton mat-raised-button type="button" color="primary" (click)="fileInput.click()">
+              <mat-icon >folder</mat-icon>
+              <mat-label #lblFile id="lblFile">Cargar Archivo</mat-label>
+            </button>
+          </div>
+          
+        </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div>
+  <mat-card *ngIf="Variables && Variables.length">
+    <mat-catd-title>Variables</mat-catd-title>
+    <mat-card_content>
+      <mat-form-field appearance="outline" fxFlex="1 1 100" >
+        <mat-label>Selecciones una variable</mat-label>
+        <mat-select (selectionChange)="onVariableChanged($event);" fxFlexFill>
+          <mat-option *ngFor="let variable of Variables" [value]="variable">{{variable.Value}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    </mat-card_content>
+  </mat-card>
+</div>
+<div>
+  <mat-card *ngIf="Metadatos && Metadatos.length">
+    <mat-catd-title>Metadatos</mat-catd-title>
+    <mat-card_content>
+      <div>
+        <mat-selection-list #metadatos [multiple]="false">
+          <mat-list-option *ngFor="let metadato of Metadatos" >
+            {{ metadato.Tipo + ': ' + metadato.Valor }}
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+    </mat-card_content>
+  </mat-card>
+</div>
+  

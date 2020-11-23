@@ -20,6 +20,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { ArrayTableComponent } from './component/array-table/array-table.component';
 import { VectorTableComponent } from './component/vector-table/vector-table.component';
 import { EscalarVariableComponent } from './component/escalar-variable/escalar-variable.component';
+import { SideMenuComponent } from './component/side-menu/side-menu.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { EscalarVariableComponent } from './component/escalar-variable/escalar-v
     DynamicTableComponent,
     ArrayTableComponent,
     VectorTableComponent,
-    EscalarVariableComponent
+    EscalarVariableComponent,
+    SideMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { EscalarVariableComponent } from './component/escalar-variable/escalar-v
     MatSelectModule,
     MatListModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
