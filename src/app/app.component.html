@@ -8,32 +8,37 @@
 <div class="app-sidenav">
 <mat-drawer-container class="sidenav-container" >
     <mat-drawer opened #drawer mode="side" class="sidenav" fxLayout="column" fxLayoutAlign="space-around stretch">
-        <div class="fileinput" fxLayout="row" fxLayoutAlign="space-around">
-            <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
-            <button mat-raised-button type="button" color="primary" (click)="fileInput.click()">Cargar Archivo</button>
-            <mat-label #lblFile id="lblFile"></mat-label>
-        </div>
-        
-        <br/>
-        <div>
-          <mat-label *ngIf="Variables && Variables.length"><b>Variables</b></mat-label>  
-        </div>
-
-        <mat-form-field appearance="outline" fxFlex="1 1 100" *ngIf="Variables && Variables.length">
-            <mat-label>Seleccione una variable</mat-label>
-            <mat-select (selectionChange)="onVariableChanged($event);" fxFlexFill>
-              <mat-option *ngFor="let variable of Variables" [value]="variable.Id">{{variable.Value}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <div *ngIf="Metadatos && Metadatos.length">
-          <mat-label><b>Metadatos</b></mat-label>  
-            <mat-selection-list #metadatos [multiple]="false">
-                <mat-list-option *ngFor="let metadato of Metadatos" >
-                  {{ metadato.Tipo + ': ' + metadato.Valor }}
-                </mat-list-option>
-              </mat-selection-list>
-        </div>
+      <mat-card>
+        <mat-card-title>Seleccione un archivo</mat-card-title>
+          <mat-card-content>
+            <div class="fileinput" fxLayout="row" fxLayoutAlign="space-around">
+              <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+              <button mat-raised-button type="button" color="primary" (click)="fileInput.click()">Cargar Archivo</button>
+              <mat-label #lblFile id="lblFile"></mat-label>
+            </div>
+          
+            <br/>
+            <div>
+              <mat-label *ngIf="Variables && Variables.length"><b>Variables</b></mat-label>  
+            </div>
+    
+            <mat-form-field appearance="outline" fxFlex="1 1 100" *ngIf="Variables && Variables.length">
+                <mat-label>Seleccione una variable</mat-label>
+                <mat-select (selectionChange)="onVariableChanged($event);" fxFlexFill>
+                  <mat-option *ngFor="let variable of Variables" [value]="variable">{{variable.Value}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+            <div *ngIf="Metadatos && Metadatos.length">
+              <mat-label><b>Metadatos</b></mat-label>  
+                <mat-selection-list #metadatos [multiple]="false">
+                    <mat-list-option *ngFor="let metadato of Metadatos" >
+                      {{ metadato.Tipo + ': ' + metadato.Valor }}
+                    </mat-list-option>
+                  </mat-selection-list>
+            </div>
+        </mat-card-content>
+      </mat-card>
     </mat-drawer>
   
     <div class="sidenav-content mat-elevation-z8">

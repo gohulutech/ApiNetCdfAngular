@@ -10,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class VectorTableComponent implements OnInit {
   private _data = new MatTableDataSource<string>();
   private _datos : string[];
+  private _variable : string;
 
   @ViewChild(MatPaginator) arrayPaginator: MatPaginator;
 
@@ -29,6 +30,15 @@ export class VectorTableComponent implements OnInit {
     }
 
     return this._data;
+  }
+
+  @Input()
+  set variable(val: string) {
+    this._variable = val;
+  }
+
+  get variable() {
+    return this._variable;
   }
 
   constructor(private ref: ChangeDetectorRef) { }

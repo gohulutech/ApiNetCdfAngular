@@ -10,6 +10,8 @@ import { MatTableDataSource } from '@angular/material/table';
 export class ArrayTableComponent implements OnInit {
   private _data = new MatTableDataSource<string[]>();
   private _datos : string[];
+  private _variable : string;
+
   displayedColumns: string[];
 
   @ViewChild(MatPaginator) arrayPaginator: MatPaginator;
@@ -23,6 +25,7 @@ export class ArrayTableComponent implements OnInit {
     this.ref.detectChanges();
   }
 
+  
   get data() : any {
     if (this.datos) {
       this._data = new MatTableDataSource(this.datos);
@@ -34,12 +37,19 @@ export class ArrayTableComponent implements OnInit {
     return this._data;
   }
 
+  @Input()
+  set variable(val: string) {
+    this._variable = val;
+  }
+
+  get variable() {
+    return this._variable;
+  }
+
   constructor(private ref: ChangeDetectorRef) { 
-    var pp = "ss";
   }
 
   ngOnInit(): void {
-    var pp ="ss";
   }
 
 }

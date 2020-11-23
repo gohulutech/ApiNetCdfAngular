@@ -84,29 +84,31 @@ export class AppComponent {
   }
 
   onVariableChanged(event) {
-    var id = event.value;
-    this.apiNetCdfService.GetMetadata(id).subscribe(m => {
-      this.Metadatos = m;
-    });
+    this.apiNetCdfService.GetMetadata(event.value.Id).subscribe(m => { this.Metadatos = m; });
 
-    this.apiNetCdfService.GetData(id).subscribe(d => {
+    this.apiNetCdfService.GetData(event.value.Id).subscribe(d => {
       this._snackBar.open("Cargando datos...", "Success", { duration: 2000 });
-      this.TipoDatoArreglo = false;
-      this.TipoDatoEscalar = false;
-      this.TipoDatoVector = false;
+      this.EstablecerTipoDatosEnFalso();
       if (d.Success && (d.TipoDato == "Arreglo")) {
         this.TipoDatoArreglo = true;
         this.arrayTable.datos = <[]>d.data;
-        this.ref.detectChanges();
+        this.arrayTable.variable = event.value.Value;
       } else if (d.Success && (d.TipoDato == "Vector")) {
         this.TipoDatoVector = true;
         this.vectorTable.datos = d.data;
-        this.ref.detectChanges();
+        this.vectorTable.variable = event.value.Value;
       } else if (d.Success && (d.TipoDato == "Escalar")) {
         this.TipoDatoEscalar = true;
         this.escalarVariable.valor = d.data;
-        this.ref.detectChanges();
+        this.escalarVariable.variable = event.value.Value;
       }
+      this.ref.detectChanges();
     })
+  }
+
+  private EstablecerTipoDatosEnFalso() {
+    this.TipoDatoArreglo = false;
+    this.TipoDatoEscalar = false;
+    this.TipoDatoVector = false;
   }
 }

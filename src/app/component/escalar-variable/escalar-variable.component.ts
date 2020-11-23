@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class EscalarVariableComponent implements OnInit {
   private _valor : string;
+  private _variable : string;
 
   @Input()
   set valor(val: any) {
@@ -17,6 +18,15 @@ export class EscalarVariableComponent implements OnInit {
     return this._valor;
   }
 
+  @Input()
+  set variable(val: string) {
+    this._variable = val;
+  }
+
+  get variable() {
+    return this._variable;
+  }
+  
   constructor() { }
 
   ngOnInit(): void {
