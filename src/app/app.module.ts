@@ -22,6 +22,11 @@ import { VectorTableComponent } from './component/vector-table/vector-table.comp
 import { EscalarVariableComponent } from './component/escalar-variable/escalar-variable.component';
 import { SideMenuComponent } from './component/side-menu/side-menu.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HighchartsChartModule } from 'highcharts-angular';
+import * as PlotlyJS from 'plotly.js/dist/plotly.js';
+import { PlotlyModule } from 'angular-plotly.js';
+ 
+PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
   declarations: [
@@ -48,7 +53,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatListModule,
     MatTableModule,
     MatPaginatorModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HighchartsChartModule,
+    PlotlyModule
   ],
   providers: [],
   bootstrap: [AppComponent]

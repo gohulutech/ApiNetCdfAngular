@@ -2,15 +2,10 @@
   <mat-card-title>Datos {{variable}}</mat-card-title>
   <mat-card-subtitle>Tipo de dato Arreglo</mat-card-subtitle>
   <mat-card-content>
-    <mat-table #table [dataSource]="data">
-      <ng-container *ngFor="let disCol of displayedColumns; let colIndex = index;" matColumnDef="{{disCol}}">
-          <mat-header-cell *matHeaderCellDef>{{disCol}}</mat-header-cell>
-          <mat-cell *matCellDef="let element">{{element[colIndex]}}</mat-cell>
-      </ng-container>
-  
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-  <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+  <div *ngIf="graph">
+    <plotly-plot [data]="graph.data" [layout]="graph.layout"
+      [useResizeHandler]="true" [style]="{position: 'relative', width: '100%', height: '100%'}">
+    </plotly-plot>
+  </div>
   </mat-card-content>
 </mat-card>

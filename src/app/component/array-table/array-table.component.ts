@@ -1,6 +1,13 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import * as Highcharts from 'highcharts';
+declare var require: any;
+//let Boost = require('highcharts/modules/boost');
+let threeD = require('highcharts/highcharts-3d');
+
+threeD(Highcharts);
+//Boost(Highcharts);
 
 @Component({
   selector: 'app-array-table',
@@ -8,6 +15,8 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./array-table.component.scss']
 })
 export class ArrayTableComponent implements OnInit {
+  public graph;
+
   private _data = new MatTableDataSource<string[]>();
   private _datos : string[];
   private _variable : string;
@@ -18,22 +27,15 @@ export class ArrayTableComponent implements OnInit {
 
   @Input()
   set datos(val: any) {
+    var values = val.map(v => v.map(v2 => Number(v2)));
+    this.graph = {
+      data: [{ z: values, type: 'surface' }],
+      layout: {autosize: true, title: 'Datos'},
+    };
     this._datos = val;
-    this.displayedColumns = (val).map((d, index) => { return `Col ${index}`; });
-    this.data.data = this._datos;
-    this.data.paginator = this.arrayPaginator;
-    this.ref.detectChanges();
   }
 
-  
   get data() : any {
-    if (this.datos) {
-      this._data = new MatTableDataSource(this.datos);
-      this.displayedColumns = (this.datos).map((d, index) => { return `Col ${index}`; });
-      this.data.paginator = this.arrayPaginator;
-      this.ref.detectChanges();
-    }
-
     return this._data;
   }
 
@@ -51,5 +53,4 @@ export class ArrayTableComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
